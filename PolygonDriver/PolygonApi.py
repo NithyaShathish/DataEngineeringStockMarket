@@ -1,5 +1,8 @@
-# This main function repeatedly calls the polygon api every 1 seconds for 24 hours
-# and stores the results.
+'''
+@Name :Nithya
+@email : nss9899@nyu.edu
+'''
+
 import datetime
 import time
 from math import sqrt, isnan
@@ -8,12 +11,14 @@ from sqlalchemy import create_engine, text
 
 
 class PolygonApi:
+    # Initializing class with api key and initializing sql local data base
     def __init__(self):
         self.key = "joZ6gWpxCELL9uMm_r1Vn9OZEP5XRFbF"
         # Create an engine to connect to the database; setting echo to false should stop it from logging in std.out
         self.engine = create_engine(
             "sqlite+pysqlite:///sqlite/final.db", echo=False, future=True)
-
+    
+    # Function to modified sample code to structure the date string
     def ts_to_datetime(self, ts) -> str:
         return datetime.datetime.fromtimestamp(ts / 1000.0).strftime('%Y-%m-%d %H:%M:%S')
 
@@ -137,6 +142,8 @@ class PolygonApi:
                 except:
                     pass
 
+    # calls the polygon api to fetch the currency data from the api and stores the data in the database
+    # updated funtion : get_real_time_currency_conversion() as per the updates in the sdk.x
     def collectData(self, currency_pairs):
         # Number of list iterations - each one should last about 1 second
         count = 0
